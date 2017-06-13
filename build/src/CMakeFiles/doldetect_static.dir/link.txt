@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../../lib/libdoldetect_static.a  CMakeFiles/doldetect_static.dir/doldetect.cpp.o CMakeFiles/doldetect_static.dir/dbscan.cpp.o
-/usr/bin/ranlib ../../lib/libdoldetect_static.a
