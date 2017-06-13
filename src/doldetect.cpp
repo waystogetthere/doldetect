@@ -1,4 +1,4 @@
-#include "doldetect.h"
+#include "doldetect_dll.h"
 #include "dbscan.h"
 #include "opencv2/nonfree/nonfree.hpp"
 
