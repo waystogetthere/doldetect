@@ -353,7 +353,7 @@ void doldetect(Mat& img, vector<Rect>& bboxes,
 		for (; j < pre_cnt.size(); ++j)
 		if (pre_cnt[j] == 0) {
 			pre_bboxes[j] = bboxes[i];
-			pre_cnt[j] = 5;
+			pre_cnt[j] = 10;
 			break;
 		}
 		if (j == pre_cnt.size()) {

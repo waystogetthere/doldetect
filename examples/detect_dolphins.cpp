@@ -69,7 +69,7 @@ int main()
 					Point(bboxes[i].x + bboxes[i].width, bboxes[i].y + bboxes[i].height), Scalar(0, 255, 0));
 			}
 			imshow("video", frame);
-			waitKey(5);
+			waitKey(10);
 			++frame_id;
 		}
 	} else {
