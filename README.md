@@ -1,4 +1,4 @@
-# DolDetect: A Real-time Dolphins Detection
+# DolDetect: A Real-time Dolphins Detection Engine
 This is a c++ engine for real time dolphin detection, providing both .so and .dll shared library.
 
 ### Dependencies
