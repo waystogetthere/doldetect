@@ -25,9 +25,12 @@ public:
 	void genTemplates();
 	void loadDictionary();
 	int predict(vector<float>& hog_feat);
+	int predict_1(vector<float>& hog_feat);
+	int predict_2(vector<float>& hog_feat);
+	int predict_3(vector<float>& hog_feat);
 	Mat descriptors_;  // vocabulary
 	vector<int> centers_;
-	CvSVM svm_;
+	CvSVM svm_,svm_1,svm_2,svm_3;
 
 private:
 	Templates() {};
@@ -128,6 +131,9 @@ void Templates::loadDictionary()
 
 	// step 4: load svm model
 	svm_.load("svm.xml");
+	svm_1.load("svm_1.xml");
+	svm_2.load("svm_2.xml");
+	svm_3.load("svm_3.xml");
 }
 
 int Templates::predict(vector<float>& hog_feat)
@@ -138,6 +144,34 @@ int Templates::predict(vector<float>& hog_feat)
 		ptr[i] = hog_feat[i];
 	return int(svm_.predict(feat));
 }
+
+int Templates::	predict_1(vector<float>& hog_feat)
+{
+	Mat feat(1, hog_feat.size(), CV_32F);
+	float *ptr = feat.ptr<float>(0);
+	for (size_t i = 0; i < hog_feat.size(); ++i)
+		ptr[i] = hog_feat[i];
+	return int(svm_1.predict(feat));
+}
+
+int Templates::predict_2(vector<float>& hog_feat)
+{
+	Mat feat(1, hog_feat.size(), CV_32F);
+	float *ptr = feat.ptr<float>(0);
+	for (size_t i = 0; i < hog_feat.size(); ++i)
+		ptr[i] = hog_feat[i];
+	return int(svm_2.predict(feat));
+}
+
+int Templates::predict_3(vector<float>& hog_feat)
+{
+	Mat feat(1, hog_feat.size(), CV_32F);
+	float *ptr = feat.ptr<float>(0);
+	for (size_t i = 0; i < hog_feat.size(); ++i)
+		ptr[i] = hog_feat[i];
+	return int(svm_3.predict(feat));
+}
+
 
 //////////////// Detect ////////////////
 void doldetect(Mat& img, vector<Rect>& bboxes,
@@ -340,9 +374,13 @@ void doldetect(Mat& img, vector<Rect>& bboxes,
 		Mat roi = gray(rect);
 		resize(roi, roi, Size(96, 32), (0, 0), (0, 0), cv::INTER_LINEAR);
 		hog.compute(roi, hog_feat, Size(96, 32), Size(0, 0));
-		if (!use_svm || Templates::Instance().predict(hog_feat) == 1) {
+		if (!use_svm || Templates::Instance().predict(hog_feat) == 1) 
+		if (Templates::Instance().predict_1(hog_feat) == 1)
+		if (Templates::Instance().predict_2(hog_feat) == 1)
+		if (Templates::Instance().predict_3(hog_feat) == 1){
 			bboxes.push_back(rect);
 		}
+
 	}
 
 	// step 8: update pre_bboxes
